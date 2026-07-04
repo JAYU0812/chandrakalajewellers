@@ -19,20 +19,11 @@ interface Showroom {
 const MOCK_SHOWROOMS: Showroom[] = [
   {
     id: 's1',
-    name: 'Chennai Flagship Boutique',
-    address: '101 Cathedral Road, Alwarpet, Chennai - 600086',
-    phone: '+91 44 2811 4040',
-    email: 'chennai@chandrakalajewellers.com',
+    name: 'Chandrakala Jewellers',
+    address: 'Chandrakala Jewellers, Civil Road, Khedbrahma - 383255',
+    phone: '+91 94270 80359',
+    email: 'chandrakalajewellers849@gmail.com',
     opening_hours: { Mon_Sat: '10:30 AM - 8:30 PM', Sun: '11:00 AM - 6:00 PM' },
-    is_active: true,
-  },
-  {
-    id: 's2',
-    name: 'Bengaluru Boutique',
-    address: '45 Lavelle Road, Richmond Town, Bengaluru - 560001',
-    phone: '+91 80 4122 3030',
-    email: 'blr@chandrakalajewellers.com',
-    opening_hours: { Mon_Sat: '10:30 AM - 8:30 PM', Sun: 'Closed' },
     is_active: true,
   },
 ];

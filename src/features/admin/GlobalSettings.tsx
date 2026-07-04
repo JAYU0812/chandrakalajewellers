@@ -12,8 +12,8 @@ export const GlobalSettings: React.FC = () => {
   const [rateGold18K, setRateGold18K] = useState(5590);
   const [rateSilver, setRateSilver] = useState(89);
 
-  const [helpline, setHelpline] = useState('+91 44 2811 4040');
-  const [whatsapp, setWhatsapp] = useState('+91 94440 28114');
+  const [helpline, setHelpline] = useState('+91 94270 80359');
+  const [whatsapp, setWhatsapp] = useState('+91 94270 80359');
   const [marqueeSpeed, setMarqueeSpeed] = useState(30);
 
   const [seoTitle, setSeoTitle] = useState('Chandrakala Jewellers | Heritage Bridal Gold Ornaments');
