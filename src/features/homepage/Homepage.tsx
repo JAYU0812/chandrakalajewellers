@@ -35,26 +35,9 @@ const collections = [
   },
 ];
 
-const showrooms = [
-  {
-    city: 'Chennai',
-    name: 'Chennai Flagship Showroom',
-    address: '101 Cathedral Road, Alwarpet, Chennai - 600086',
-    phone: '+91 44 2811 4040',
-    email: 'chennai@chandrakalajewellers.com',
-  },
-  {
-    city: 'Bengaluru',
-    name: 'Bengaluru Boutique',
-    address: '45 Lavelle Road, Richmond Town, Bengaluru - 560001',
-    phone: '+91 80 4122 3030',
-    email: 'blr@chandrakalajewellers.com',
-  },
-];
-
 export const Homepage: React.FC = () => {
   const [activeCollection, setActiveCollection] = useState(0);
-  const [bookingLocation, setBookingLocation] = useState('Chennai');
+  const [bookingLocation, setBookingLocation] = useState('Khedbrahma');
   const [bookingDate, setBookingDate] = useState('');
   const [bookingTime, setBookingTime] = useState('11:00 AM');
   const [bookingName, setBookingName] = useState('');
@@ -376,41 +359,53 @@ export const Homepage: React.FC = () => {
       <section id="locator" className="py-24 bg-obsidian text-pearl px-6 md:px-12 border-t border-gold-primary/15">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-gold-primary font-sans font-semibold">Our Showrooms</span>
-            <h2 className="font-serif text-3xl md:text-5xl mt-2 font-light">Showroom Locations</h2>
+            <span className="text-[10px] uppercase tracking-[0.3em] text-gold-primary font-sans font-semibold">Visit Our Showroom</span>
+            <h2 className="font-serif text-3xl md:text-5xl mt-2 font-light">Khedbrahma Boutique</h2>
             <div className="w-12 h-[1px] bg-gold-primary mx-auto mt-4" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {showrooms.map((showroom) => (
-              <GlassCard key={showroom.city} className="p-8 border-gold-primary/20 dark:bg-black/20" hoverEffect={true}>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-6xl mx-auto items-center">
+            {/* Details Column */}
+            <div className="lg:col-span-5">
+              <GlassCard className="p-8 border-gold-primary/20 dark:bg-black/20" hoverEffect={false}>
                 <div className="flex flex-col gap-6">
                   <div>
-                    <h3 className="font-serif text-xl text-gold-primary">{showroom.name}</h3>
+                    <h3 className="font-serif text-2xl text-gold-primary">Chandrakala Jewellers</h3>
                     <div className="w-8 h-[1px] bg-gold-primary/50 mt-2" />
                   </div>
                   
                   <div className="flex flex-col gap-4 text-xs font-sans text-pearl/70 font-light">
                     <div className="flex items-start gap-3">
-                      <MapPin className="w-4 h-4 text-gold-primary shrink-0 mt-0.5" />
-                      <p className="leading-relaxed">{showroom.address}</p>
+                      <MapPin className="w-4.5 h-4.5 text-gold-primary shrink-0 mt-0.5" />
+                      <p className="leading-relaxed">Chandrakala Jewellers, Civil Road, Khedbrahma - 383255</p>
                     </div>
                     <div className="flex items-center gap-3">
-                      <Phone className="w-4 h-4 text-gold-primary shrink-0" />
-                      <p>{showroom.phone}</p>
+                      <Phone className="w-4.5 h-4.5 text-gold-primary shrink-0" />
+                      <p>+91 94270 80359</p>
                     </div>
                     <div className="flex items-center gap-3">
-                      <Mail className="w-4 h-4 text-gold-primary shrink-0" />
-                      <p>{showroom.email}</p>
+                      <Mail className="w-4.5 h-4.5 text-gold-primary shrink-0" />
+                      <p>chandrakalajewellers849@gmail.com</p>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="text-gold-primary font-mono text-[9px] uppercase tracking-wider font-semibold">Instagram:</span>
+                      <a 
+                        href="https://www.instagram.com/laxmijewellerskhedbrahma" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="hover:underline hover:text-gold-primary transition-colors text-[10px]"
+                      >
+                        laxmijewellerskhedbrahma
+                      </a>
                     </div>
                   </div>
 
-                  <div>
+                  <div className="pt-2">
                     <LuxuryButton 
                       variant="outline" 
                       size="sm" 
                       onClick={() => {
-                        setBookingLocation(showroom.city);
+                        setBookingLocation('Khedbrahma');
                         window.location.href = '#booking';
                       }}
                     >
@@ -419,7 +414,21 @@ export const Homepage: React.FC = () => {
                   </div>
                 </div>
               </GlassCard>
-            ))}
+            </div>
+
+            {/* Embedded Google Maps Column */}
+            <div className="lg:col-span-7 rounded-luxury-md overflow-hidden border border-gold-primary/20 bg-black/10 aspect-video w-full h-[350px]">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3643.9898983184976!2d73.04377127512433!3d24.031421378479642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395d0b1a27d5a3df%3A0x216db437426f9e6a!2sChandrakala%20jewellers!5e0!3m2!1sen!2sin!4v1783160383648!5m2!1sen!2sin" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }} 
+                allowFullScreen={true} 
+                loading="lazy" 
+                referrerPolicy="strict-origin-when-cross-origin"
+                title="Chandrakala Jewellers Khedbrahma Map"
+              />
+            </div>
           </div>
         </div>
       </section>
