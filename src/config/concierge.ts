@@ -2,7 +2,7 @@
  * Configurable parameters for Customer Experience concierge operations.
  */
 export const CONCIERGE_SETTINGS = {
-  whatsappNumber: '+919999999999', // Public brand helpline number
+  whatsappNumber: '+919427080359', // Public brand helpline number
   
   // WhatsApp Message Templates
   templates: {
