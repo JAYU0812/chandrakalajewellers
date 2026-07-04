@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+@import "tailwindcss";
+
+:root {
+  --color-gold-primary: hsl(38, 48%, 48%);
+  --color-gold-light: hsl(38, 62%, 94%);
+  --color-gold-dark: hsl(38, 55%, 35%);
+  --color-obsidian: hsl(210, 11%, 15%);
+  --color-pearl: hsl(40, 20%, 98%);
+  --color-emerald: hsl(150, 40%, 20%);
+  
+  --bg-primary: var(--color-pearl);
+  --text-primary: var(--color-obsidian);
+  --border-primary: rgba(212, 175, 55, 0.15);
+  --border-card: rgba(212, 175, 55, 0.15);
+}
+
+.dark {
+  --color-gold-primary: hsl(38, 52%, 54%);
+  --color-gold-light: hsl(38, 20%, 15%);
+  --color-gold-dark: hsl(38, 55%, 35%);
+  --color-obsidian: hsl(210, 15%, 8%);
+  --color-pearl: hsl(40, 4%, 90%);
+  --color-emerald: hsl(150, 42%, 24%);
+
+  --bg-primary: var(--color-obsidian);
+  --text-primary: var(--color-pearl);
+  --border-primary: rgba(212, 175, 55, 0.15);
+  --border-card: rgba(212, 175, 55, 0.25);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+@theme {
+  --color-gold-primary: var(--color-gold-primary);
+  --color-gold-light: var(--color-gold-light);
+  --color-gold-dark: var(--color-gold-dark);
+  --color-obsidian: var(--color-obsidian);
+  --color-pearl: var(--color-pearl);
+  --color-emerald: var(--color-emerald);
+  
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Outfit", sans-serif;
+  
+  --backdrop-blur-luxury: 16px;
+  --shadow-luxury: 0 10px 30px -15px rgba(212, 175, 55, 0.15);
+  
+  --radius-luxury-sm: 4px;
+  --radius-luxury-md: 8px;
+  --radius-luxury-lg: 16px;
+}
+
+/* Custom metallic shimmer effect keyframes */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(212, 175, 55, 0) 0%,
+    rgba(212, 175, 55, 0.3) 50%,
+    rgba(212, 175, 55, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite linear;
+}
+
+/* Custom continuous glass shimmer */
+.glass-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 4s infinite linear;
+}
+
+/* Custom gold text shine selection */
+::selection {
+  background: var(--color-gold-primary);
+  color: var(--color-obsidian);
+}

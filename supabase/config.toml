@@ -1,0 +1,21 @@
+# Project AURUM - Supabase CLI Configuration
+
+project_id = "project-aurum"
+
+[api]
+port = 54321
+schemas = ["public", "storage"]
+
+[db]
+port = 54322
+shadow_port = 54323
+
+[storage]
+enabled = true
+
+[auth]
+enabled = true
+site_url = "http://localhost:5173"
+additional_redirect_urls = ["http://localhost:5173/admin/dashboard"]
+jwt_expiry = 3600
+enable_signup = false # Closed administrative user loop
