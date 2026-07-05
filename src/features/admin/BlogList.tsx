@@ -5,6 +5,7 @@ import { supabase } from '../../lib/supabase';
 import { GlassCard } from '../../components/ui/GlassCard';
 import { LuxuryButton } from '../../components/ui/LuxuryButton';
 import { Plus, Edit3, Trash2, FileText, ShieldCheck } from 'lucide-react';
+import { ENV } from '../../lib/env';
 
 interface BlogPost {
   id: string;
@@ -57,8 +58,8 @@ export const BlogList: React.FC = () => {
     },
   });
 
-  const blogs = (dbBlogs && dbBlogs.length > 0 ? dbBlogs : MOCK_BLOGS) as BlogPost[];
-  const isSandbox = !dbBlogs || dbBlogs.length === MOCK_BLOGS.length;
+  const isSandbox = ENV.VITE_SUPABASE_URL.includes('placeholder-project');
+  const blogs = (isSandbox ? MOCK_BLOGS : (dbBlogs || [])) as BlogPost[];
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {

@@ -5,6 +5,7 @@ import { supabase } from '../../lib/supabase';
 import { GlassCard } from '../../components/ui/GlassCard';
 import { LuxuryButton } from '../../components/ui/LuxuryButton';
 import { Plus, Edit3, Trash2, FolderHeart, ShieldCheck } from 'lucide-react';
+import { ENV } from '../../lib/env';
 
 interface Collection {
   id: string;
@@ -18,25 +19,25 @@ interface Collection {
 const MOCK_COLLECTIONS: Collection[] = [
   {
     id: 'col1',
-    name: 'Bridal Heritage Collection',
+    name: 'The Bridal Heritage',
     slug: 'bridal-heritage',
-    description: 'Champagne gold pieces hand-crafted for the modern Indian bride.',
+    description: 'Timeless temple ornaments handcrafted in deep vintage red gold profiles.',
     banner_storage_path: '/assets/images/bridal_heritage.jpg',
     is_active: true,
   },
   {
     id: 'col2',
-    name: 'Royal Antique Group',
+    name: 'Royal Antique Collection',
     slug: 'royal-antique',
-    description: 'Vibrant gems encrusted in oxidized golds reflecting temple architecture.',
+    description: 'South Indian temple motifs and filigree work featuring exquisite ruby trims.',
     banner_storage_path: '/assets/images/royal_antique.jpg',
     is_active: true,
   },
   {
     id: 'col3',
-    name: 'Minimalist Line',
-    slug: 'minimalist-line',
-    description: 'Sleek, lightweight daily luxury bangles and chains.',
+    name: 'Modern Minimalist Line',
+    slug: 'modern-minimalist',
+    description: 'Sleek modular gold cuffs stackable to form modern geometric outlines.',
     banner_storage_path: '/assets/images/minimalist_line.jpg',
     is_active: true,
   },
@@ -63,8 +64,8 @@ export const CollectionList: React.FC = () => {
     },
   });
 
-  const collections = (dbCollections && dbCollections.length > 0 ? dbCollections : MOCK_COLLECTIONS) as Collection[];
-  const isSandbox = !dbCollections || dbCollections.length === MOCK_COLLECTIONS.length;
+  const isSandbox = ENV.VITE_SUPABASE_URL.includes('placeholder-project');
+  const collections = (isSandbox ? MOCK_COLLECTIONS : (dbCollections || [])) as Collection[];
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {

@@ -5,6 +5,7 @@ import { supabase } from '../../lib/supabase';
 import { GlassCard } from '../../components/ui/GlassCard';
 import { LuxuryButton } from '../../components/ui/LuxuryButton';
 import { Plus, Edit3, Trash2, FolderTree, ShieldCheck } from 'lucide-react';
+import { ENV } from '../../lib/env';
 
 interface Category {
   id: string;
@@ -17,34 +18,26 @@ interface Category {
 
 const MOCK_CATEGORIES: Category[] = [
   {
-    id: 'c1',
+    id: 'f1aa3f2e-0c5c-4c5d-a6e7-9f8a9b0c0d4e',
     name: 'Necklaces',
     slug: 'necklaces',
-    description: 'Champagne gold necklaces and bridal chokers.',
+    description: 'Luxury bridal chokers, chains, and long harams.',
     parent_category_id: null,
     is_active: true,
   },
   {
-    id: 'c2',
-    name: 'Chokers',
-    slug: 'chokers',
-    description: 'Traditional close-fitting bridal chokers.',
-    parent_category_id: 'c1',
-    is_active: true,
-  },
-  {
-    id: 'c3',
+    id: 'f2aa3f2e-1c5c-4c5d-a6e7-9f8a9b0c1d4e',
     name: 'Rings',
     slug: 'rings',
-    description: 'Imperial cocktail rings and wedding bands.',
+    description: 'Traditional antique bands and engagement solitaires.',
     parent_category_id: null,
     is_active: true,
   },
   {
-    id: 'c4',
-    name: 'Bangles',
-    slug: 'bangles',
-    description: 'Gold bangles and cuffs.',
+    id: 'f3aa3f2e-2c5c-4c5d-a6e7-9f8a9b0c2d4e',
+    name: 'Bangles & Bracelets',
+    slug: 'bangles-bracelets',
+    description: 'Stiff gold kada bands and stackable chain links.',
     parent_category_id: null,
     is_active: true,
   },
@@ -71,8 +64,8 @@ export const CategoryList: React.FC = () => {
     },
   });
 
-  const categories = (dbCategories && dbCategories.length > 0 ? dbCategories : MOCK_CATEGORIES) as Category[];
-  const isSandbox = !dbCategories || dbCategories.length === MOCK_CATEGORIES.length;
+  const isSandbox = ENV.VITE_SUPABASE_URL.includes('placeholder-project');
+  const categories = (isSandbox ? MOCK_CATEGORIES : (dbCategories || [])) as Category[];
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {

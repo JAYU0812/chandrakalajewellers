@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '../../lib/supabase';
 import { GlassCard } from '../../components/ui/GlassCard';
 import { ShieldCheck, Star, Trash2 } from 'lucide-react';
+import { ENV } from '../../lib/env';
 
 interface Testimonial {
   id: string;
@@ -19,28 +20,19 @@ const MOCK_TESTIMONIALS: Testimonial[] = [
     id: 't1',
     customer_name: 'Ananya S.',
     rating: 5,
-    review_text: 'The Heritage Kundan Necklace exceeded all of our expectations for our wedding day! The customer concierge service was outstanding.',
+    review_text: 'The bespoke service we received for my bridal gold jewelry was unmatched. A true luxury consultation.',
     is_featured: true,
     is_active: true,
-    created_at: new Date(Date.now() - 3600000 * 24 * 3).toISOString(),
+    created_at: '2026-07-04T12:00:00Z',
   },
   {
     id: 't2',
-    customer_name: 'Rajesh K.',
+    customer_name: 'Vikram K.',
     rating: 5,
-    review_text: 'Top-tier transparency on daily commodity gold rates and craftsmanship labor fees breakout. Best jewellery showroom in Chennai.',
+    review_text: 'Transparent pricing matrices and authentic dynamic gold karat estimations. Excellent showroom experience.',
     is_featured: true,
     is_active: true,
-    created_at: new Date(Date.now() - 3600000 * 24 * 7).toISOString(),
-  },
-  {
-    id: 't3',
-    customer_name: 'Deepika M.',
-    rating: 4,
-    review_text: 'Beautiful modern stackable bangles. The custom design resizing request was handled professionally.',
-    is_featured: false,
-    is_active: false,
-    created_at: new Date(Date.now() - 3600000 * 24 * 10).toISOString(),
+    created_at: '2026-07-04T12:00:00Z',
   },
 ];
 
@@ -63,8 +55,8 @@ export const TestimonialList: React.FC = () => {
     },
   });
 
-  const testimonials = (dbTestimonials && dbTestimonials.length > 0 ? dbTestimonials : MOCK_TESTIMONIALS) as Testimonial[];
-  const isSandbox = !dbTestimonials || dbTestimonials.length === MOCK_TESTIMONIALS.length;
+  const isSandbox = ENV.VITE_SUPABASE_URL.includes('placeholder-project');
+  const testimonials = (isSandbox ? MOCK_TESTIMONIALS : (dbTestimonials || [])) as Testimonial[];
 
   const toggleMutation = useMutation({
     mutationFn: async ({ id, fields }: { id: string; fields: Partial<Testimonial> }) => {

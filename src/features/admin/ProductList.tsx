@@ -6,6 +6,7 @@ import { useProductPrice } from '../../hooks/useProductPrice';
 import { GlassCard } from '../../components/ui/GlassCard';
 import { LuxuryButton } from '../../components/ui/LuxuryButton';
 import { Plus, Edit3, Trash2, FolderGit, ShieldCheck } from 'lucide-react';
+import { ENV } from '../../lib/env';
 
 interface Product {
   id: string;
@@ -126,8 +127,8 @@ export const ProductList: React.FC = () => {
     },
   });
 
-  const products = (dbProducts && dbProducts.length > 0 ? dbProducts : MOCK_PRODUCTS) as Product[];
-  const isSandbox = !dbProducts || dbProducts.length === MOCK_PRODUCTS.length;
+  const isSandbox = ENV.VITE_SUPABASE_URL.includes('placeholder-project');
+  const products = (isSandbox ? MOCK_PRODUCTS : (dbProducts || [])) as Product[];
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {

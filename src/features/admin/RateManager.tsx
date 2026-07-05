@@ -4,6 +4,7 @@ import { supabase } from '../../lib/supabase';
 import { GlassCard } from '../../components/ui/GlassCard';
 import { LuxuryButton } from '../../components/ui/LuxuryButton';
 import { Coins, LineChart, ShieldCheck, TrendingUp, Save } from 'lucide-react';
+import { ENV } from '../../lib/env';
 
 interface MetalRate {
   id: string;
@@ -45,8 +46,8 @@ export const RateManager: React.FC = () => {
     },
   });
 
-  const isSandbox = !dbRates || dbRates.length === 0 || dbRates.length === MOCK_RATES.length;
-  const ratesList = isSandbox ? localRates : (dbRates as MetalRate[]);
+  const isSandbox = ENV.VITE_SUPABASE_URL.includes('placeholder-project');
+  const ratesList = isSandbox ? localRates : (dbRates || []) as MetalRate[];
 
   // Get active rates (latest entry per metal + purity combination)
   const getActiveRate = (metal: string, purity: string) => {

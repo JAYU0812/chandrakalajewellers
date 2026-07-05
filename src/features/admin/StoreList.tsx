@@ -5,6 +5,7 @@ import { supabase } from '../../lib/supabase';
 import { GlassCard } from '../../components/ui/GlassCard';
 import { LuxuryButton } from '../../components/ui/LuxuryButton';
 import { Plus, Edit3, Trash2, MapPin, ShieldCheck } from 'lucide-react';
+import { ENV } from '../../lib/env';
 
 interface Showroom {
   id: string;
@@ -12,7 +13,7 @@ interface Showroom {
   address: string;
   phone: string;
   email: string;
-  opening_hours: Record<string, string>;
+  opening_hours: { Mon_Sat: string; Sun: string };
   is_active: boolean;
 }
 
@@ -48,8 +49,8 @@ export const StoreList: React.FC = () => {
     },
   });
 
-  const showrooms = (dbShowrooms && dbShowrooms.length > 0 ? dbShowrooms : MOCK_SHOWROOMS) as Showroom[];
-  const isSandbox = !dbShowrooms || dbShowrooms.length === MOCK_SHOWROOMS.length;
+  const isSandbox = ENV.VITE_SUPABASE_URL.includes('placeholder-project');
+  const showrooms = (isSandbox ? MOCK_SHOWROOMS : (dbShowrooms || [])) as Showroom[];
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
