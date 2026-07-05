@@ -335,6 +335,35 @@ CREATE POLICY "Allow admins to edit showrooms" ON public.store_locations FOR ALL
 CREATE POLICY "Allow anyone to book showroom appointments" ON public.appointments FOR INSERT TO anon, authenticated WITH CHECK (true);
 CREATE POLICY "Allow admins to review and schedule appointments" ON public.appointments FOR ALL TO authenticated USING (public.is_admin());
 
+-- Collections: Public read, admin full CRUD
+CREATE POLICY "Allow anyone to read collections" ON public.collections FOR SELECT TO anon, authenticated USING (true);
+CREATE POLICY "Allow admins full control on collections" ON public.collections FOR ALL TO authenticated USING (public.is_admin());
+
+-- Categories: Public read, admin full CRUD
+CREATE POLICY "Allow anyone to read categories" ON public.categories FOR SELECT TO anon, authenticated USING (true);
+CREATE POLICY "Allow admins full control on categories" ON public.categories FOR ALL TO authenticated USING (public.is_admin());
+
+-- Product Category Mappings: Public read, admin full CRUD
+CREATE POLICY "Allow anyone to read product category mapping" ON public.product_category_mapping FOR SELECT TO anon, authenticated USING (true);
+CREATE POLICY "Allow admins full control on product category mapping" ON public.product_category_mapping FOR ALL TO authenticated USING (public.is_admin());
+
+-- Product Collection Mappings: Public read, admin full CRUD
+CREATE POLICY "Allow anyone to read product collection mapping" ON public.product_collection_mapping FOR SELECT TO anon, authenticated USING (true);
+CREATE POLICY "Allow admins full control on product collection mapping" ON public.product_collection_mapping FOR ALL TO authenticated USING (public.is_admin());
+
+-- Wishlists: Public access
+CREATE POLICY "Allow anyone to manage wishlists" ON public.wishlists FOR ALL TO anon, authenticated USING (true) WITH CHECK (true);
+
+-- Comparisons: Public access
+CREATE POLICY "Allow anyone to manage comparisons" ON public.comparisons FOR ALL TO anon, authenticated USING (true) WITH CHECK (true);
+
+-- Blogs & Testimonials: Public read, admins full CRUD
+CREATE POLICY "Allow anyone to read blogs" ON public.blogs FOR SELECT TO anon, authenticated USING (true);
+CREATE POLICY "Allow admins full control on blogs" ON public.blogs FOR ALL TO authenticated USING (public.is_admin());
+
+CREATE POLICY "Allow anyone to read testimonials" ON public.testimonials FOR SELECT TO anon, authenticated USING (true);
+CREATE POLICY "Allow admins to moderate testimonials" ON public.testimonials FOR ALL TO authenticated USING (public.is_admin());
+
 -- Audit Logs: Super Admin exclusive view, no updates/deletes permitted
 CREATE POLICY "Allow super_admins to browse audit logs" ON public.audit_logs FOR SELECT TO authenticated USING (
     EXISTS (SELECT 1 FROM public.admin_roles WHERE user_id = auth.uid() AND role = 'super_admin')
